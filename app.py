@@ -1,45 +1,44 @@
 import sys
 
-# Функции для выполнения операций
-def add(a, b):
-    return a + b
+if len(sys.argv) < 4:
+    print("Usage: app.py <operation> <operand1> <operand2>")
+    sys.exit(1)
 
-def subtract(a, b):
-    return a - b
+operation = sys.argv[1]
+operand1 = sys.argv[2]
+operand2 = sys.argv[3]
 
-def multiply(a, b):
-    return a * b
-
-def divide(a, b):
-    if b == 0:
-        raise ValueError("Division by zero is not allowed.")
-    return a / b
-
-# Основная часть программы
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python3 app.py <operation> <num1> <num2>")
-        sys.exit(1)
-
-    operation = sys.argv[1]
+if operation == "add":
     try:
-        num1 = float(sys.argv[2])
-        num2 = float(sys.argv[3])
-    except ValueError:
-        print("Error: Both num1 and num2 must be numbers.")
+        result = int(operand1) + int(operand2)
+        print(f"Result: {result}")
+    except ValueError as e:
+        print(f"Error: {e}")
         sys.exit(1)
-
-    if operation == "add":
-        print(f"Result: {add(num1, num2)}")
-    elif operation == "subtract":
-        print(f"Result: {subtract(num1, num2)}")
-    elif operation == "multiply":
-        print(f"Result: {multiply(num1, num2)}")
-    elif operation == "divide":
-        try:
-            print(f"Result: {divide(num1, num2)}")
-        except ValueError as e:
-            print(f"Error: {e}")
-    else:
-        print("Unsupported operation. Use add, subtract, multiply, or divide.")
+elif operation == "subtract":
+    try:
+        result = int(operand1) - int(operand2)
+        print(f"Result: {result}")
+    except ValueError as e:
+        print(f"Error: {e}")
         sys.exit(1)
+elif operation == "multiply":
+    try:
+        result = int(operand1) * int(operand2)
+        print(f"Result: {result}")
+    except ValueError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+elif operation == "divide":
+    try:
+        result = int(operand1) / int(operand2)
+        print(f"Result: {result}")
+    except ValueError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+    except ZeroDivisionError:
+        print("Error: Division by zero is not allowed")
+        sys.exit(1)
+else:
+    print("Unsupported operation. Use add, subtract, or multiply.")
+    sys.exit(1)
